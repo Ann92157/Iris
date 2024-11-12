@@ -1,5 +1,6 @@
 from data import load_data, split_data
 from models import create_linear_model, create_logistic_model
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 import yaml
 
 #Загрузка конфига
@@ -18,11 +19,27 @@ def train_models(config):
     # Обучение линейной регрессии
     linear_model = create_linear_model()
     linear_model.fit(X_train, y_train)
-    print("Uspekh")
+    y_pred_lin = lin_reg.predict(X_test)
+    y_pred_class_lin = (y_pred_lin >= 0.5).astype(int) #порог для разделения классов
+    accuracy_lin = accuracy_score(y_test, y_pred_class_lin)
+    precision_lin = precision_score(y_test, y_pred_class_lin)
+    recall_lin = recall_score(y_test, y_pred_class_lin)
+    
+    print(f"Линейная регрессия - Accuracy: {accuracy_lin:.2f}")
+    print(f"Линейная регрессия - Precision: {precision_lin:.2f}")
+    print(f"Линейная регрессия - Recall: {recall_lin:.2f}")
     
     # Обучение логистической регрессии
     logistic_model = create_logistic_model(
         config["random_state"], config["C"], config["solver"]
     )
     logistic_model.fit(X_train, y_train)
-    print("Uspekh")
+    lr_y_pred = lr.predict(X_test)
+    accuracy_log = accuracy_score(y_test, lr_y_pred)
+    precision_log = precision_score(y_test, lr_y_pred)
+    recall_log = recall_score(y_test, lr_y_pred)
+    
+    print(f"Логистическая регрессия - Accuracy: {accuracy_log:.2f}")
+    print(f"Логистическая регрессия - Precision: {precision_log:.2f}")
+    print(f"Логистическая регрессия - Recall: {recall_log:.2f}")
+
