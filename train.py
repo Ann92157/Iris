@@ -16,7 +16,7 @@ def train_models(config):
     #Визуализация исходных данных
     visualize_data()
 
-    X, y = load_data(r"C:\Users\Анна\Desktop\НГУ\1 семестр\Iris.csv")
+    X, y = load_data(r"Iris.csv")
     X_train, X_test, y_train, y_test = split_data(
         X, y, config["test_size"], config["random_state"]
     )
@@ -52,5 +52,5 @@ def train_models(config):
     print(f"Логистическая регрессия - Recall: {recall_log:.2f}")
 
 if __name__ == "__main__":
-    config = load_config(r"C:\Users\Анна\Desktop\НГУ\1 семестр\1_\config.yaml")
+    config = load_config(r"config.yaml")
     train_models(config)
