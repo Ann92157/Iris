@@ -12,7 +12,6 @@ def load_config(config_path):
 #Обучение моделей
 def train_models(config):
     X, y = load_data("Iris.csv")
-    config = load_config("config.yaml")
     X_train, X_test, y_train, y_test = split_data(
         X, y, config["test_size"], config["random_state"]
     )
@@ -25,7 +24,8 @@ def train_models(config):
     accuracy_lin = accuracy_score(y_test, y_pred_class_lin)
     precision_lin = precision_score(y_test, y_pred_class_lin)
     recall_lin = recall_score(y_test, y_pred_class_lin)
-    
+
+    #Вывод метрик модели
     print(f"Линейная регрессия - Accuracy: {accuracy_lin:.2f}")
     print(f"Линейная регрессия - Precision: {precision_lin:.2f}")
     print(f"Линейная регрессия - Recall: {recall_lin:.2f}")
@@ -40,7 +40,11 @@ def train_models(config):
     precision_log = precision_score(y_test, lr_y_pred)
     recall_log = recall_score(y_test, lr_y_pred)
     
+    #Вывод метрик модели
     print(f"Логистическая регрессия - Accuracy: {accuracy_log:.2f}")
     print(f"Логистическая регрессия - Precision: {precision_log:.2f}")
     print(f"Логистическая регрессия - Recall: {recall_log:.2f}")
 
+if __name__ == "__main__":
+    config = load_config("config.yaml")
+    train_models(config)
