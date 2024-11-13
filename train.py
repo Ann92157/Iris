@@ -12,6 +12,7 @@ def load_config(config_path):
 #Обучение моделей
 def train_models(config):
     X, y = load_data("Iris.csv")
+    config = load_config("config.yaml")
     X_train, X_test, y_train, y_test = split_data(
         X, y, config["test_size"], config["random_state"]
     )
@@ -19,7 +20,7 @@ def train_models(config):
     # Обучение линейной регрессии
     linear_model = create_linear_model()
     linear_model.fit(X_train, y_train)
-    y_pred_lin = lin_reg.predict(X_test)
+    y_pred_lin = linear_model.predict(X_test)
     y_pred_class_lin = (y_pred_lin >= 0.5).astype(int) #порог для разделения классов
     accuracy_lin = accuracy_score(y_test, y_pred_class_lin)
     precision_lin = precision_score(y_test, y_pred_class_lin)
@@ -34,7 +35,7 @@ def train_models(config):
         config["random_state"], config["C"], config["solver"]
     )
     logistic_model.fit(X_train, y_train)
-    lr_y_pred = lr.predict(X_test)
+    lr_y_pred = logistic_model.predict(X_test)
     accuracy_log = accuracy_score(y_test, lr_y_pred)
     precision_log = precision_score(y_test, lr_y_pred)
     recall_log = recall_score(y_test, lr_y_pred)
