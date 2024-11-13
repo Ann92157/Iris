@@ -32,7 +32,7 @@ def train_models(config):
     
     # Обучение логистической регрессии
     logistic_model = create_logistic_model(
-        config["random_state"], config["C"], config["solver"]
+        config["random_state"], config["C"]
     )
     logistic_model.fit(X_train, y_train)
     lr_y_pred = logistic_model.predict(X_test)
