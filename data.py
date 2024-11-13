@@ -4,9 +4,9 @@ from sklearn.model_selection import train_test_split
 #загрузка данных
 def load_data(data_path):
     data = pd.read_csv(data_path)
-    X = data[['PetalLengthCm', 'PetalWidthCm']]
     #для бинарной классификации выбираем классы Versicolor и Virginica, т.к. они наименее различимы
     data = data.drop(index=data.index[data['Species'] == 'Iris-setosa'])
+    X = data[['PetalLengthCm', 'PetalWidthCm']]
     data['Species'].replace({'Iris-versicolor':0, 'Iris-virginica':1}, inplace = True)
     y = data["Species"]
     return X, y
