@@ -3,7 +3,7 @@ from graphics import visualize_data
 from models import create_linear_model, create_logistic_model
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import yaml
-from kaggle_datasets import KaggleDatasets
+import kagglehub
 
 
 #Загрузка конфига
@@ -18,7 +18,7 @@ def train_models(config):
     #Визуализация исходных данных
     visualize_data()
 
-    path = KaggleDatasets().dataset_download("uciml/iris")
+    path = kagglehub.dataset_download("uciml/iris")
     df = pd.read_csv(path[0])
     X = df.drop('species', axis=1)
     y = df['species']
