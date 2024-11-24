@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import yaml
 import kagglehub
-
+import os
 
 #Загрузка конфига
 def load_config(config_path):
@@ -20,7 +20,11 @@ def train_models(config):
     visualize_data()
 
     path = kagglehub.dataset_download("uciml/iris")
-    df = pd.read_csv(path[0])
+    for file_name in os.listdir(path[0]):
+        if file_name.endswith(".csv"):
+            csv_path = os.path.join(path[0], file_name)
+            
+    df = pd.read_csv(csv_path)
     X = df.drop('species', axis=1)
     y = df['species']
     X_train, X_test, y_train, y_test = split_data(
