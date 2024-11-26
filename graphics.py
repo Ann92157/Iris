@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from sklearn.metrics import roc_curve, auc, roc_auc_score
 
 def visualize_data():
     snsdata = pd.read_csv("Iris.csv").drop(['Id'], axis=1)
@@ -29,4 +30,15 @@ def plot_ridge(X, y, ridge_model):
     plt.ylabel('PetalWidthCm (scaled)')
     plt.title('Линейная регрессия с Ridge регуляризацией')
     plt.legend()
+    plt.show()
+
+def roc_auc_curve(y_test, y_prob):
+    fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+    roc_auc = auc(fpr, tpr)
+    plt.plot(fpr, tpr, color='green')
+    plt.plot([0, 1], [0, 1], color='blue')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
     plt.show()
