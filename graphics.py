@@ -22,7 +22,7 @@ def plot_linear(X, y, linear_model):
 
 def plot_ridge(X, y, ridge_model):
     x_values = np.linspace(X[:, 0].min(), X[:, 0].max(), 100)
-    y_values = -(0.5-ridge_reg.intercept_ + ridge_reg.coef_[0] * x_values) / ridge_reg.coef_[1]
+    y_values = -(0.5-ridge_model.intercept_ + ridge_model.coef_[0] * x_values) / ridge_model.coef_[1]
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap='viridis')
     plt.plot(x_values, y_values, color='blue', label='Разделяющая прямая')
     plt.xlabel('PetalLengthCm (scaled)')
