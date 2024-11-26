@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 def visualize_data():
     snsdata = pd.read_csv("Iris.csv").drop(['Id'], axis=1)
