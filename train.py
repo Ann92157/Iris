@@ -17,14 +17,8 @@ def load_config(config_path):
 def train_models(config):
 
     #Визуализация исходных данных
-    visualize_data()
-
-    path = kagglehub.dataset_download("uciml/iris")
-    for file_name in os.listdir(path[0]):
-        if file_name.endswith(".csv"):
-            csv_path = os.path.join(path[0], file_name)
-            
-    df = pd.read_csv(csv_path)
+    visualize_data()       
+    df = pd.read_csv('Iris.csv')
     X = df.drop('species', axis=1)
     y = df['species']
     X_train, X_test, y_train, y_test = split_data(
