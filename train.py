@@ -5,6 +5,7 @@ from models import create_linear_model, create_logistic_model
 import pandas as pd
 import numpy as np
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.preprocessing import StandardScaler
 import yaml
 
 
@@ -59,6 +60,27 @@ def train_models(config):
     print(f"Логистическая регрессия - Accuracy: {accuracy_log:.2f}")
     print(f"Логистическая регрессия - Precision: {precision_log:.2f}")
     print(f"Логистическая регрессия - Recall: {recall_log:.2f}")
+
+    # Обучение линейной регрессии c L2-регуляризацией
+    Ridge_model = create_linear_model_Ridge(alpha = config["C"])
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    X_train, X_test, y_train, y_test = split_data(
+        X_scaled, y, config["test_size"], config["random_state"]
+    )
+    Ridge_model.fit(X_train, y_train)
+    y_pred = Ridge_model.predict(X_test)
+    y_pred_class = (y_pred >= 0.5).astype(int)
+
+    accuracy_ridge = accuracy_score(y_test, y_pred_class_lin)
+    precision_ridge = precision_score(y_test, y_pred_class_lin)
+    recall_ridge = recall_score(y_test, y_pred_class_lin)
+    
+    print(f"Линейная регрессия с регуляризацией- Accuracy: {accuracy_ridge:.2f}")
+    print(f"Линейная регрессия с регуляризацией - Precision: {precision_ridge:.2f}")
+    print(f"Линейная регрессия с регуляризацией - Recall: {recall_ridge:.2f}")
+
+    plot_linear(X_scaled, y, Ridge_model)
 
 if __name__ == "__main__":
     config = load_config(r"config.yaml")
