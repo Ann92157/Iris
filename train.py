@@ -19,7 +19,7 @@ def train_models(config):
     #Визуализация исходных данных
     visualize_data()       
     df = pd.read_csv('Iris.csv')
-    data_for_binary = df.drop(index=data.index[data['Species'] == 'Iris-setosa'])
+    data_for_binary = df.drop(index=df.index[data['Species'] == 'Iris-setosa'])
     data_for_binary['Species'].replace({'Iris-versicolor':0, 'Iris-virginica':1}, inplace = True)
     X_train, X_test, y_train, y_test = split_data(
         X, y, config["test_size"], config["random_state"]
