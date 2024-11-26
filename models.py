@@ -1,4 +1,6 @@
-from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression, Ridge
+from sklearn.preprocessing import StandardScaler
+
 # Модель линейной регрессии
 def create_linear_model():
     return LinearRegression()
@@ -9,3 +11,7 @@ def create_logistic_model(random_state, C):
         random_state=random_state,
         C=C
     )
+
+# Модель линейной регрессии c L2 регуляризацией
+def create_linear_model_Ridge(alpha):
+    return Ridge(alpha = alpha)
