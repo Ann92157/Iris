@@ -10,5 +10,7 @@
 ![output](https://github.com/user-attachments/assets/115f0e89-0c7b-49a8-ac12-c7a334a6e090)
 
 ROC-AUC кривая:
-![output](https://github.com/user-attachments/assets/4b2b766b-611a-4fc2-8bfe-f2434684822b)
+
+![output](https://github.com/user-attachments/assets/b14477f1-1c33-4b2f-bac2-694ff6fcb5c0)
+
 AUC: 0.958
