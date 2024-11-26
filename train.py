@@ -1,5 +1,6 @@
 from data import load_data, split_data
 from graphics import visualize_data
+from graphics import plot_linear
 from models import create_linear_model, create_logistic_model
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score
