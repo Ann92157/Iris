@@ -1,6 +1,6 @@
 from data import load_data, split_data
 from graphics import visualize_data
-from graphics import plot_linear
+from graphics import plot_linear, plot_ridge
 from models import create_linear_model, create_logistic_model, create_linear_model_Ridge
 import pandas as pd
 import numpy as np
@@ -80,7 +80,7 @@ def train_models(config):
     print(f"Линейная регрессия с регуляризацией - Precision: {precision_ridge:.2f}")
     print(f"Линейная регрессия с регуляризацией - Recall: {recall_ridge:.2f}")
 
-    plot_linear(X_scaled, y, Ridge_model)
+    plot_ridge(X_scaled, y, Ridge_model)
 
 if __name__ == "__main__":
     config = load_config(r"config.yaml")
