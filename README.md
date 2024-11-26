@@ -8,3 +8,7 @@
 
 Разделяющая прямая для линейной регрессии с L2-регуляризацией, alpha=1.0:
 ![output](https://github.com/user-attachments/assets/115f0e89-0c7b-49a8-ac12-c7a334a6e090)
+
+ROC-AUC кривая:
+![output](https://github.com/user-attachments/assets/022eca7a-4801-40cb-9a2a-b4dbd559d501)
+AUC: 0.958
