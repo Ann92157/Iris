@@ -1,6 +1,6 @@
 from data import load_data, split_data
 from graphics import visualize_data
-from graphics import plot_linear, plot_ridge
+from graphics import plot_linear, plot_ridge, roc_auc_curve
 from models import create_linear_model, create_logistic_model, create_linear_model_Ridge
 import pandas as pd
 import numpy as np
@@ -60,6 +60,9 @@ def train_models(config):
     print(f"Логистическая регрессия - Accuracy: {accuracy_log:.2f}")
     print(f"Логистическая регрессия - Precision: {precision_log:.2f}")
     print(f"Логистическая регрессия - Recall: {recall_log:.2f}")
+
+    y_prob = logistic_model.predict_proba(X_test)[:, 1]
+    roc_auc_curve(y_test, y_prob)
 
     # Обучение линейной регрессии c L2-регуляризацией
     Ridge_model = create_linear_model_Ridge(alpha = config["C"])
