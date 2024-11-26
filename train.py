@@ -40,6 +40,8 @@ def train_models(config):
     print(f"Линейная регрессия - Accuracy: {accuracy_lin:.2f}")
     print(f"Линейная регрессия - Precision: {precision_lin:.2f}")
     print(f"Линейная регрессия - Recall: {recall_lin:.2f}")
+
+    plot_linear(X, y, linear_model)
     
     # Обучение логистической регрессии
     logistic_model = create_logistic_model(
