@@ -20,6 +20,7 @@ data_for_binary['Species'].replace({'Iris-versicolor': 0, 'Iris-virginica': 1}, 
 X = data_for_binary[['PetalLengthCm', 'PetalWidthCm']].values
 y = data_for_binary['Species'].values
 
+#разделение выборки на обучающую и тестовую
 ratio = 0.8
 total_rows = data_for_binary.shape[0]
 train = int(ratio * total_rows)
@@ -32,6 +33,7 @@ y_test = y[train:]
 X_train = np.concatenate((np.ones((X_train.shape[0], 1)), X_train), axis=1)
 X_test = np.concatenate((np.ones((X_test.shape[0], 1)), X_test), axis=1)
 
+#обучение модели
 alpha = 0.01
 iterations = 1000
 w = np.zeros(X_train.shape[1])
@@ -43,7 +45,7 @@ y_pred_class = (y_pred >= 0.5).astype(int)
 
 print(f"Коэффициенты модели: {w}") 
 
-
+#вывод метрик модели
 accuracy_lin = accuracy_score(y_test, y_pred_class)
 precision_lin = precision_score(y_test, y_pred_class)
 recall_lin = recall_score(y_test, y_pred_class)
