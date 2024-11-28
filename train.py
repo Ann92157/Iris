@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.preprocessing import StandardScaler
+from sklearn import datasets
 import yaml
 
 
@@ -20,11 +21,13 @@ def train_models(config):
 
     #Визуализация исходных данных
     visualize_data()       
-    df = pd.read_csv('Iris.csv')
-    data_for_binary = df.drop(index=df.index[df['Species'] == 'Iris-setosa'])
-    data_for_binary['Species'].replace({'Iris-versicolor':0, 'Iris-virginica':1}, inplace = True)
-    X = data_for_binary[['PetalLengthCm', 'PetalWidthCm']] #отбираем признаки, наиболее скореллированные с видом по матрице корреляции
-    y = data_for_binary['Species']
+    df = datasets.load_iris()
+    data = pd.DataFrame(data=np.c_[iris['data'], iris['target']], columns=iris['feature_names'] + ['target'])
+    data_for_binary = data.drop(index=data.index[data['target'] == 0])
+    data_for_binary['target'].replace({1: 0, 2: 1}, inplace=True)
+    X = data_for_binary[['petal length (cm)', 'petal width (cm)']] #отбираем признаки, наиболее скореллированные с видом по матрице корреляции
+    y = data_for_binary['target']
+    
     X_train, X_test, y_train, y_test = split_data(
         X, y, config["test_size"], config["random_state"]
     )
