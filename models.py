@@ -9,6 +9,7 @@ def create_linear_model():
 def create_logistic_model(random_state, C):
     return LogisticRegression(
         random_state=random_state,
+        penalty='l2',
         C=C
     )
 
