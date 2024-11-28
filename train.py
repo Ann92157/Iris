@@ -18,11 +18,11 @@ def load_config(config_path):
 
 #Обучение моделей
 def train_models(config):
-
-    #Визуализация исходных данных
-    visualize_data()       
+    
     df = datasets.load_iris()
-    data = pd.DataFrame(data=np.c_[iris['data'], iris['target']], columns=iris['feature_names'] + ['target'])
+    data = pd.DataFrame(data=df['data'], columns=df['feature_names'])
+    data['target'] = df['target']
+    
     data_for_binary = data.drop(index=data.index[data['target'] == 0])
     data_for_binary['target'].replace({1: 0, 2: 1}, inplace=True)
     X = data_for_binary[['petal length (cm)', 'petal width (cm)']] #отбираем признаки, наиболее скореллированные с видом по матрице корреляции
