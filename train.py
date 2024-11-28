@@ -1,5 +1,4 @@
 from data import split_data
-from graphics import visualize_data
 from graphics import plot_linear, plot_ridge, roc_auc_curve
 from models import create_linear_model, create_logistic_model, create_linear_model_Ridge
 import pandas as pd
