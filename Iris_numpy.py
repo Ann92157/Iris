@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn import datasets
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
 def predict(X,  w):
@@ -13,12 +14,14 @@ def gradient_mse(X, y, w, alpha, iterations):
         w = w - alpha * gradient
     return w
 
-data = pd.read_csv('Iris.csv')
-data_for_binary = data.drop(index=data.index[data['Species'] == 'Iris-setosa'])
-data_for_binary['Species'].replace({'Iris-versicolor': 0, 'Iris-virginica': 1}, inplace=True)
+df = datasets.load_iris()
+data = pd.DataFrame(data=df['data'], columns=df['feature_names'])
+data['target'] = df['target']
 
-X = data_for_binary[['PetalLengthCm', 'PetalWidthCm']].values
-y = data_for_binary['Species'].values
+data_for_binary = data.drop(index=data.index[data['target'] == 0])
+data_for_binary['target'].replace({1: 0, 2: 1}, inplace=True)
+X = data_for_binary[['petal length (cm)', 'petal width (cm)']] #отбираем признаки, наиболее скореллированные с видом по матрице корреляции
+y = data_for_binary['target']
 
 #разделение выборки на обучающую и тестовую
 ratio = 0.8
